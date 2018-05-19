@@ -28,13 +28,9 @@
         <property name="prefix" value="/WEB-INF/views/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-
-
-
-
-
-
-
-
+    
+    
+	<!-- 访问静态资源配置，因为在web.xml中，我配置mvc拦截的时候用的是/,所以会将所有的访问都会拦截，
+	一些静态资源会被拦截下来导致访问不到，所以需要配置 -->
+    <mvc:resources location="/common" mapping="/**"/>
 </beans>

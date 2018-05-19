@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>  
+    <!-- 元素首次出现必须符合下面的顺序 -->  
+    <!-- (properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?) -->  
+   
+    <!-- 加载常量配置信息 -->  
+    <!-- 可以覆盖重写，用于解密-http://www.mybatis.org/mybatis-3/zh/configuration.html  
+        ·在 properties 元素体内指定的属性首先被读取。  
+        ·然后根据 properties 元素中的 resource 属性读取类路径下属性文件或根据 url 属性指定的路径读取属性文件，并覆盖已读取的同名属性。  
+        ·最后读取作为方法参数传递的属性，并覆盖已读取的同名属性。 -->
+      
+    <!-- 为实体类定义别名 -->  
+    <typeAliases>
+    	<!-- 主要为mapper内部指定的class类起别名 
+    		<typeAlias alias="userModel"  type="com.bestcxx.stu.springmvc.model.UserModel"/>
+    	-->
+    	<typeAlias alias="userModel"  type="cn.yarne.com.base.model.Users"/>
+    </typeAliases>  
+      
+    <!-- 定义映射器 -->  
+    <mappers>  
+        <!-- 使用这个方案，可以单独指定Mapper的位置:
+          <mapper resource="mybatis/mappings/UserModelMapper.xml"/>  
+          <mapper resource="mybatis/mappings/UserModelTwoMapper.xml"/>
+        -->  
+        <!-- 使用下面两个个方法，Mapper.xml 文件位置必须在和其内部 <mapper namespace="">的类在一起，
+        	当然，使用注解模式的话，Mapper.xml文件就没有必要存在了
+        -->  
+        <!-- 直接指定一个包去扫描-内保包含多个Mapper配置-
+          <package name="com.bestcxx.stu.springmvc.mapper"/>
+        -->  
+        <!-- class 级别的指定 
+        	使用spring的配置方式：需要在spring的配置文件中指定:
+        	<mybatis:scan base-package="edu.zju.bme.data.manage.mapper" />
+        	不使用spring来配置：
+          	<mapper class="com.bestcxx.stu.springmvc.mapper.UserModelMapper"/>  
+          	<mapper class="com.bestcxx.stu.springmvc.mapper.UserModelTwoMapper"/> 
+        -->   
+    </mappers>  
+</configuration>  

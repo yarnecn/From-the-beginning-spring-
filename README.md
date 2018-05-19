@@ -3,3 +3,6 @@
 # Everyone is making progress together
 # If you need to modify a new branch
 
+
+# sql-> resource->resources->sql/
+

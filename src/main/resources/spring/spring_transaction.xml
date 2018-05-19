@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/fex  
+        http://www.springframework.org/schema/fex/spring-fex-1.5.xsd  
+        http://www.springframework.org/schema/task   
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd   
+        http://www.springframework.org/schema/aop  
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- spring配置事物主要分为三步：1.配置事务管理；2.配置事务增强；3.进行切面配置
+		如果不起作用的话可以考虑是不是数据库不支持事物的原因,mysql的话默认的表类型是MyISAM,
+		就是不支持事物,改成InnoDB,就可以支持事物了
+		alter table table_name engine=innodb;
+	 -->
+
+	<!-- 开启 spring 事物管理 -->
+	<!-- <bean name="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean> -->
+
+	<!-- 事物相关配置：事物的传播机制等 
+	传播级别:
+	1）、REQUIRED
+		如果当前方法已经在事务中，那么就以父事务执行，不需要新建事务；如果当前方法不在事务中，
+		那么就为当前方法新建事务。回滚情况：父子方法中任何地方出现问题，都会全部回滚。
+		
+	2）、SURPPORTED
+		如果当前方法已经在事务中，那么就以当前事务执行；如果当前方法不再事务中，那么就以非事务方式运行。
+		如果运行在事务中，那么只要出现异常都会回滚。
+		
+	3）、NOT_SURPPORTED
+		如果当前方法已经在事务中，那么就挂起当前事务，以非事务方式运行，方法执行完毕后，
+		恢复事务；如果当前方法不再事务中，那么就以非事务方式执行。
+		
+	4）、MANDATORY
+		强制以事务方式执行，如果当前方法不在事务中，那么会抛出异常。
+		
+	5）、NEVER
+		与MANDATORY相反，强制以非事务方式执行，如果当前方法在事务中，那么会抛出异常。
+		
+	6）、REQUIRED_NEW
+		与REQUIRED不同的是，无论该方法当前是不是在事务中，都会为自己新建一个事务。如果当前已经在事务中，
+		那么会挂起父事务，为自己新建一个事务。父事务不影响它子事务的提交和回滚。
+		
+	7）、NESTED
+		嵌套事务。理解Nested的关键是savepoint。他与PROPAGATION_REQUIRES_NEW的区别是，
+		PROPAGATION_REQUIRES_NEW另起一个事务，将会与他的父事务相互独立，而Nested的事务和他的父事务是相依的，
+		他的提交是要等和他的父事务一块提交的。也就是说，如果父事务最后回滚，他也要回滚的。而Nested事务的好处是他有一个savepoint。
+	 
+	 -->
+	 <!-- 如果配置需要引入依赖 aspectj,否则报错 -->
+	<!-- <tx:advice id="iccardTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.RuntimeException" />
+			<tx:method name="add*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.RuntimeException" />
+			<tx:method name="create*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.RuntimeException" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false"
+				rollback-for="java.lang.Exception" />
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="select*" propagation="SUPPORTS" />
+			<tx:method name="query*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice> -->
+	
+	<!-- 开启 spring 事物切面,将事物控制在service业务层 -->
+	<aop:config>
+		<aop:pointcut id="iccardTerm"
+			expression="execution(public * cn.yarne.com.base.service.*.*(..))" />
+		<aop:advisor pointcut-ref="iccardTerm" advice-ref="iccardTxAdvice" />
+	</aop:config>
+	
+
+	<!--开启注释事务 
+	常用注解： 
+	（1）、事务的传播性：@Transactional(propagation=Propagation.REQUIRED) 
+		如果有事务, 那么加入事务, 没有的话新建一个(默认情况下) 
+
+	（2）、事务的超时性：@Transactional(timeout=30) //默认是30秒 
+		注意这里说的是事务的超时性而不是Connection的超时性，这两个是有区别的 
+		
+	（3）、事务的隔离级别：@Transactional(isolation 
+		= Isolation.READ_UNCOMMITTED) 读取未提交数据(会出现脏读, 不可重复读) 基本不使用 
+		
+	（4）、回滚： 指定单一异常类：@Transactional(rollbackFor=RuntimeException.class) 
+		指定多个异常类：@Transactional(rollbackFor={RuntimeException.class, Exception.class}) 
+		该属性用于设置需要进行回滚的异常类数组，当方法中抛出指定异常数组中的异常时，则进行事务回滚。 
+		
+	（5）、只读：@Transactional(readOnly=true) 
+		该属性用于设置当前事务是否为只读事务，设置为true表示只读，false则表示可读写，默认值为false。
+		 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+</beans>
