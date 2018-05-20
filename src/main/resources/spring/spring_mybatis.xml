@@ -89,6 +89,12 @@
         <!-- 加入 mybatis配置 主要是配置一些mapper.xml内部制定的类别名等 -->
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />  
     </bean>
+    
+    <!-- Mybatis配置sqlTemplate模板，直接注入就可以引用 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory" />
+    </bean>
+    
     <!-- Mybatis配置接口存储的包，用来扫描mapper接口-->
     <mybatis:scan base-package="cn.yarne.com.base.mapper" />
 </beans>

@@ -20,6 +20,18 @@
         http://www.springframework.org/schema/aop  
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         
+    <!-- 
+     	 由于采用的是SpringMVC、 MyBatis，故统一采用了标注来声明Service、Controller 
+		由于服务器启动时的加载配置文件的顺序为web.xml,applicationContext.xml(Spring的配置文件)
+		,spring_mvc.xml(SpringMVC的配置文件)，由于applicationContext.xml配置文件中
+		Controller会先进行扫描装配，但是此时service还没有进行事务增强处理，得到的将是原样的Service
+		（没有经过事务加强处理，故而没有事务处理能力）,所以我们必须在root-context.xml中不扫描Controller
+     -->    
+    <context:component-scan base-package="cn.yarne.com.base">
+		<!-- 扫描所有的controller 但是不扫描service -->
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>    
+        
 	<!-- 导入spring 数据源 配置信息 -->
 	<import resource="classpath:spring/spring_mybatis.xml" />
 	<!-- 导入spring 事物 配置信息 -->

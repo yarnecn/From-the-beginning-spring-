@@ -17,20 +17,26 @@
         http://www.springframework.org/schema/task/spring-task-3.0.xsd   
         http://www.springframework.org/schema/aop  
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 配置注解扫描的类,必须配置，否则扫描不到controller里面的注解  -->
+	<context:component-scan base-package="cn.yarne.com.base">
+		<!-- 扫描所有的controller 但是不扫描service -->
+			<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
 	
-	<!-- 配置注解扫描的类 -->
-	<context:component-scan base-package="cn.yarne.com.base"/>
+	
 	<!-- 启动注解 -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven />
+	
 	<!-- 配置mvc视图解析 -->
-	 <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-    
-    
-	<!-- 访问静态资源配置，因为在web.xml中，我配置mvc拦截的时候用的是/,所以会将所有的访问都会拦截，
-	一些静态资源会被拦截下来导致访问不到，所以需要配置 -->
-    <mvc:resources location="/common" mapping="/**"/>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<!-- 访问静态资源配置，因为在web.xml中，我配置mvc拦截的时候用的是/,所以会将所有的访问都会拦截， 一些静态资源会被拦截下来导致访问不到，所以需要配置 -->
+	<mvc:resources location="/common" mapping="/**" />
 </beans>

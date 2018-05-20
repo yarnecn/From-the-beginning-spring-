@@ -2,6 +2,7 @@ package cn.yarne.com.base.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.yarne.com.base.mapper.HelloMapper;
@@ -22,6 +23,7 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED) 
 	public Integer insertUsers(Users user) {
 		Integer insertUsers = helloMapper.insertUsers(user);
 		int i=0/0;

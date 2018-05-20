@@ -28,10 +28,10 @@
 	 -->
 
 	<!-- 开启 spring 事物管理 -->
-	<!-- <bean name="transactionManager"
+	 <bean name="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
-	</bean> -->
+	</bean>
 
 	<!-- 事物相关配置：事物的传播机制等 
 	传播级别:
@@ -64,7 +64,7 @@
 	 
 	 -->
 	 <!-- 如果配置需要引入依赖 aspectj,否则报错 -->
-	<!-- <tx:advice id="iccardTxAdvice" transaction-manager="transactionManager">
+	 <tx:advice id="iccardTxAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="delete*" propagation="REQUIRED" read-only="false"
 				rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
@@ -81,7 +81,7 @@
 			<tx:method name="select*" propagation="SUPPORTS" />
 			<tx:method name="query*" propagation="SUPPORTS" />
 		</tx:attributes>
-	</tx:advice> -->
+	</tx:advice> 
 	
 	<!-- 开启 spring 事物切面,将事物控制在service业务层 -->
 	<aop:config>
