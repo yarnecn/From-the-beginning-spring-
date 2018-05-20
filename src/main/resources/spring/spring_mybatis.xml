@@ -24,7 +24,8 @@
         http://www.springframework.org/schema/aop  
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     
-    <!-- classpath: 这个是项目的根目录  等同于和java/resources/webapp 处于同一级别-->    
+    <!-- classpath: 这个是项目的根目录  等同于和java/resources/webapp 处于同一级别--> 
+    <!-- 如需开启或者关闭mybatis sql日志，可以到Log4j配置文件中配置 -->   
     
 	<!-- alibaba durid数据库连接配置文件加载 
 	
