@@ -21,11 +21,24 @@
         http://www.springframework.org/schema/aop  
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<!-- spring配置事物主要分为三步：1.配置事务管理；2.配置事务增强；3.进行切面配置
+	 <!-- spring配置事物主要分为三步：1.配置事务管理；2.配置事务增强；3.进行切面配置
 		如果不起作用的话可以考虑是不是数据库不支持事物的原因,mysql的话默认的表类型是MyISAM,
 		就是不支持事物,改成InnoDB,就可以支持事物了
 		alter table table_name engine=innodb;
 	 -->
+	
+	 <!-- 
+     	 由于采用的是SpringMVC、 MyBatis，故统一采用了标注来声明Service、Controller 
+		由于服务器启动时的加载配置文件的顺序为web.xml,applicationContext.xml(Spring的配置文件)
+		,spring_mvc.xml(SpringMVC的配置文件)，由于applicationContext.xml配置文件中
+		Controller会先进行扫描装配，但是此时service还没有进行事务增强处理，得到的将是原样的Service
+		（没有经过事务加强处理，故而没有事务处理能力）,所以我们必须在root-context.xml中不扫描Controller
+     -->    
+    <context:component-scan base-package="cn.yarne.com.base">
+		<!-- 扫描所有的controller 但是不扫描service -->
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	 
 
 	<!-- 开启 spring 事物管理 -->
 	 <bean name="transactionManager"
