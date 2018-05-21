@@ -12,12 +12,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         ·然后根据 properties 元素中的 resource 属性读取类路径下属性文件或根据 url 属性指定的路径读取属性文件，并覆盖已读取的同名属性。  
         ·最后读取作为方法参数传递的属性，并覆盖已读取的同名属性。 -->
       
-      <settings>
-
+    <!-- 用来指定Mybatis所用日志的具体实现，未指定时默认会自己寻找
+    	SLF4J | LOG4J | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING | NO_LOGGING
+     -->
+    <settings>
         <!-- 打印查询语句 -->
-
         <setting name="logImpl" value="LOG4J" />
-
     </settings>
       
     <!-- 为实体类定义别名 -->

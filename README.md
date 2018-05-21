@@ -6,3 +6,6 @@
 
 # sql-> resource->resources->sql/
 
+
+spring+springmvc+mybatis+事物+log4j
+
