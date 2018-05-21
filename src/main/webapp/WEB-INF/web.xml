@@ -62,6 +62,12 @@
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
+	
+	<!-- 启动自定义监听器 -->
+	<listener>
+		<listener-class>cn.yarne.com.base.interceptor.ServerListener</listener-class>
+	</listener>
+	
 
 	<!-- alibaba durid 连接池视图监控 可以访问 http://127.0.0.1:8080/druid/ 来查看监控页面 -->
 	<servlet>
