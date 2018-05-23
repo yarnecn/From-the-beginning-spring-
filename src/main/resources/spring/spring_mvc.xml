@@ -37,10 +37,16 @@
 	</bean>
 
 
-	<!-- 访问静态资源配置，因为在web.xml中，我配置mvc拦截的时候用的是/,所以会将所有的访问都会拦截， 一些静态资源会被拦截下来导致访问不到，所以需要配置 -->
-	<mvc:resources location="/common" mapping="/**" />
-
+	<!-- 访问静态资源配置，因为在web.xml中，我配置mvc拦截的时候用的是/,所以会将所有的访问都会拦截，
+	 一些静态资源会被拦截下来导致访问不到，所以需要配置 -->
+	 
+	<!-- 在springMVC-servlet.xml中配置<mvc:default-servlet-handler />后，
+	会在Spring MVC上下文中定义一个org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler，
+	它会像一个检查员，对进入DispatcherServlet的URL进行筛查，如果发现是静态资源的请求，就将该请求转由Web应用服务器默认的Servlet处理，
+	如果不是静态资源的请求，才由DispatcherServlet继续处理。 -->
 	<mvc:default-servlet-handler/>
-	<mvc:resources mapping="swagger-ui.html" location="classpath*:META-INF/resources/" />
-	<mvc:resources mapping="webjars/**" location="classpath*:META-INF/resources/webjars/"/>
+	
+	<!-- 配置访问swagger-ui的静态资源路径 -->
+	<mvc:resources mapping="swagger-ui.html" location="classpath:META-INF/resources/" />
+	<mvc:resources mapping="webjars/**" location="classpath:META-INF/resources/webjars/"/>
 </beans>

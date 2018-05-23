@@ -2,18 +2,28 @@ package cn.yarne.com.base.controller;
 
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.spi.http.HttpContext;
+
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yarne.com.base.model.Users;
 import cn.yarne.com.base.service.HelloService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Controller
 @RequestMapping("/")
+@Api(value = "测试接口", description = "主要用来测试")
 public class HelloController {
 	
 	private static final  Logger logger=Logger.getLogger(HelloController.class);
@@ -21,10 +31,11 @@ public class HelloController {
 	@Autowired
 	private HelloService helloService;
 	
-	@RequestMapping(value="hello",produces="application/json;charset=utf-8")
+	@RequestMapping(value="hello",produces="application/json;charset=utf-8",method=RequestMethod.GET)
 	@ResponseBody
-	public String hello(){
-		logger.info("这是日志的打印方式");
+	@ApiOperation(value = "这个接口主要是搭建框架的时候测试以及以后的规范")
+	public String hello(@ApiParam(required = false, value = "用做输出的一句话")String hello){
+		logger.info("这是日志的打印方式"+hello);
 		logger.info(helloService.helloDemo());
 		Users user=new Users();
 		user.setAge(16);
