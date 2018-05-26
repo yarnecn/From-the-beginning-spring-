@@ -12,7 +12,6 @@ import cn.yarne.com.base.service.HelloService;
 @Service
 public class HelloServiceImpl implements HelloService {
 
-	@SuppressWarnings("unused")
 	@Autowired
 	private HelloMapper helloMapper;
 	
