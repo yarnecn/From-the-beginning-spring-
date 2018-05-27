@@ -23,6 +23,7 @@
 		<mysql_connector_version>8.0.11</mysql_connector_version>
 		<alibaba_druid_version>1.1.9</alibaba_druid_version>
 		<aspectj_version>1.5.4</aspectj_version>
+		<shiro_version>1.4.0</shiro_version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -145,7 +146,7 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj_version}</version>
 		</dependency>
-
+		<!-- swagger2依赖 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -161,7 +162,27 @@
 			<artifactId>swagger-annotations</artifactId>
 			<version>1.5.17</version>
 		</dependency>
+		<!-- shiro -->
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro_version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-web -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro_version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro_version}</version>
+		</dependency>
 	</dependencies>
+
 	<!-- 配置私服仓库地址 -->
 	<distributionManagement>
 		<repository>
@@ -199,10 +220,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
-		<!-- resources 这个配置可以配置在编译时候包含或者排除的一些配置文件,include包含,exclude排除
-			如果配置有问题会出现一些资源文件加载不上的问题，这个可以默认不配置
-		 -->
+
+		<!-- resources 这个配置可以配置在编译时候包含或者排除的一些配置文件,include包含,exclude排除 如果配置有问题会出现一些资源文件加载不上的问题，这个可以默认不配置 -->
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

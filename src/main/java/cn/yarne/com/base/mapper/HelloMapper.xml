@@ -12,5 +12,4 @@
   	insert into users(name,age) values(#{name,jdbcType=VARCHAR},#{age,jdbcType=DECIMAL})
   </insert>
   
-  
   </mapper>

@@ -22,7 +22,6 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED) 
 	public Integer insertUsers(Users user) {
 		Integer insertUsers = helloMapper.insertUsers(user);
 		int i=0/0;

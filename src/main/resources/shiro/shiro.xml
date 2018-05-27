@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/fex  
+        http://www.springframework.org/schema/fex/spring-fex-1.5.xsd  
+        http://www.springframework.org/schema/task   
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd   
+        http://www.springframework.org/schema/aop  
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	
+	<!-- 自定义域realm 用来自定义权限管理 -->
+    <bean id="Users_Realm" class="cn.yarne.com.base.shiro.realm.UsersRealm"></bean>
+    
+    <!-- 安全管理器  ref对象-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="Users_Realm"/>
+    </bean>
+    
+	 <!-- shiro filter 这里主要过滤filter的拦截 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 安全管理器必须的 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 身份认证失败   认证提交的地址 -->
+        <property name="loginUrl" value="/index.jsp"/>
+        <!-- 权限认证失败    没有权限认证提交的地址 -->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <!-- Shiro连接约束配置,即过滤链的定义 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- 对静态资源设置匿名访问 -->
+                /login = anon
+                <!-- /** = authc 所有url都必须认证通过才可以访问 -->
+                /admin* = authc
+            </value>
+        </property>
+    </bean>
+    
+    
+    <!-- Shiro生命周期处理器 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+</beans>

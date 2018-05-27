@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.yarne.com.base.example.SysUserExample;
+import cn.yarne.com.base.example.SysUserExample.Criteria;
 import cn.yarne.com.base.model.Users;
 import cn.yarne.com.base.service.HelloService;
 import io.swagger.annotations.Api;
