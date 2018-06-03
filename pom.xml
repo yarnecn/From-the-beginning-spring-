@@ -231,6 +231,16 @@
 				</includes>
 				<filtering>false</filtering>
 			</resource>
+			<!-- 在这个地方必须配置，因为现在我的mapper.xml是在java目录下，并不是在resources下边，不加的话会过滤掉
+			 导致报错找不到
+			 -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
 		</resources>
 	</build>
 	<profiles>
