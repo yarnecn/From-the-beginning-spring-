@@ -6,26 +6,27 @@ import org.apache.ibatis.annotations.Param;
 
 import cn.yarne.com.base.model.SysUser;
 
-public interface BaseMapper<T,V> {
-	long countByExample(V example);
+public interface BaseMapper<T, V> {
 
-	int deleteByExample(V example);
+    long countByExample(V example);
 
-	int deleteByPrimaryKey(Integer id);
+    int deleteByExample(V example);
 
-	int insert(T record);
+    int deleteByPrimaryKey(Integer id);
 
-	int insertSelective(T record);
+    int insert(T record);
 
-	List<T> selectByExample(V example);
+    int insertSelective(T record);
 
-	T selectByPrimaryKey(Integer id);
+    List<T> selectByExample(V example);
 
-	int updateByExampleSelective(@Param("record") T record, @Param("example") V example);
+    T selectByPrimaryKey(Integer id);
 
-	int updateByExample(@Param("record") T record, @Param("example") V example);
+    int updateByExampleSelective(@Param("record") T record, @Param("example") V example);
 
-	int updateByPrimaryKeySelective(T record);
+    int updateByExample(@Param("record") T record, @Param("example") V example);
 
-	int updateByPrimaryKey(T record);
+    int updateByPrimaryKeySelective(T record);
+
+    int updateByPrimaryKey(T record);
 }

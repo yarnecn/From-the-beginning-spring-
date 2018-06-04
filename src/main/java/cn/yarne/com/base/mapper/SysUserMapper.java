@@ -8,6 +8,7 @@ import cn.yarne.com.base.example.SysUserExample;
 import cn.yarne.com.base.model.SysUser;
 
 public interface SysUserMapper {
+
     long countByExample(SysUserExample example);
 
     int deleteByExample(SysUserExample example);
