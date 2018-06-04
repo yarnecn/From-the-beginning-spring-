@@ -214,9 +214,11 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
-					<!-- 这里配置端口号和访问路径 -->
-					<port>8080</port>
-					<path>/</path>
+					<!-- 这里配置端口号和访问路径,访问路径如果配置的是/那么访问http://localhost:8080/的话就直接能访问到资源,否则的话需要
+					 http://localhost:8080/everythings/加一层项目名称
+					 -->
+					<!--<port>8080</port>-->
+					<path>/everythings</path>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -227,6 +229,16 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<!-- 因为我们把mapper从resource路径移到了java下，所以需要另外配置包含的xml文件，否则编译后mapper.xml会编译不进去
+			 导致报错找不到一些mapper中的方法
+			 -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
 					<include>**/*.xml</include>
 				</includes>
 				<filtering>false</filtering>
