@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     		<typeAlias alias="userModel"  type="com.bestcxx.stu.springmvc.model.UserModel"/>
     	-->
     	<typeAlias alias="userModel"  type="cn.yarne.com.base.model.Users"/>
+        <typeAlias alias="sysUserModel"  type="cn.yarne.com.base.model.SysUser"/>
     </typeAliases>  
       
     <!-- 定义映射器 -->  
