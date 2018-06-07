@@ -20,7 +20,7 @@ public class ShiroFormFilter extends FormAuthenticationFilter {
         //清除原先的地址 shiro权限框架在认证时认证通过之后 就会跳转到上一次访问的路径
         WebUtils.getAndClearSavedRequest(request);
         //之前有个bug，若上一次请求为注销请求 则会无限死循环 认证成功会立即发送注销请求
-        WebUtils.redirectToSavedRequest(request, response, "/index.jsp");
+        WebUtils.redirectToSavedRequest(request, response, "/login.jsp");
         return false;
     }
 }

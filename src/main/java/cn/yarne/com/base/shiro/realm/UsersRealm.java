@@ -35,8 +35,12 @@ public class UsersRealm extends AuthorizingRealm {
         logger.debug("shiro开始认证");
         //从token中获取用户名
         String username = (String) token.getPrincipal();
+
         //去数据库中查询用户名是否存在
-        SysUser sysUser = sysUserService.getUserByUsername(username);
+        //SysUser sysUser = sysUserService.getUserByUsername(username);
+        SysUser sysUser=new SysUser();
+        sysUser.setLoginName("yarne");
+        sysUser.setPassword("root");
         //如果不存在则抛出用户不存在异常
         if (sysUser == null) {
             throw new UnknownAccountException();

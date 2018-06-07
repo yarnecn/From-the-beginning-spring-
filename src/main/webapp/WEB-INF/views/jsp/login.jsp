@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 </head>
 <body>
-<h2>Hello World!</h2>
+<h2>${message}</h2>
 
 <form action="/everythings/system/login" method="post">
     <label>用户名:</label>
