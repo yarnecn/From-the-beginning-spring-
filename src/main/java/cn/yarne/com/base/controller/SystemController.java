@@ -3,6 +3,7 @@ package cn.yarne.com.base.controller;
 
 import cn.yarne.com.base.model.SysUser;
 import cn.yarne.com.base.model.Users;
+import cn.yarne.com.base.other.ResultData;
 import cn.yarne.com.base.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +36,10 @@ public class SystemController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录接口")
+    @ResponseBody
     public String login(@ApiParam(required = true, value = "用户的信息(登录名，密码)") SysUser sysUser, Model model) {
+        //创建一个返回的结果集
+        ResultData resultData=new ResultData();
         // 获取shiro主体
         Subject subject = SecurityUtils.getSubject();
         // 根据传来的登录名密码创建一个token用户密码令牌
@@ -50,40 +54,16 @@ public class SystemController {
             logger.debug("session的Id" + session.getId());
             logger.debug("session主机地址" + session.getHost());
             logger.debug("session有效期间" + session.getId());
-            return "illusory";
+            resultData.setCode(0);
+            resultData.setMsg("登录成功");
+        }catch (Exception e) {
+            e.printStackTrace();
+            msg = "用户名或者密码错误" + token.getPrincipal() + " was incorrect.";
+            logger.debug(msg);
+            resultData.setCode(1);
+            resultData.setMsg(msg);
         }
-        //根据抛出的异常判断错误信息
-        catch (IncorrectCredentialsException e) {
-            msg = "密码错误" + token.getPrincipal() + " was incorrect.";
-            model.addAttribute("message", msg);
-            logger.debug(msg);
-        } catch (ExcessiveAttemptsException e) {
-            msg = "登录失败次数过多";
-            model.addAttribute("message", msg);
-            logger.debug(msg);
-        } catch (LockedAccountException e) {
-            msg = "帐号已被锁定The account for username " + token.getPrincipal() + " was locked.";
-            model.addAttribute("message", msg);
-            logger.debug(msg);
-        } catch (DisabledAccountException e) {
-            msg = "帐号已被禁用The account for username " + token.getPrincipal() + " was disabled.";
-            model.addAttribute("message", msg);
-            logger.debug(msg);
-        } catch (ExpiredCredentialsException e) {
-            msg = "帐号已被禁用the account for username " + token.getPrincipal() + "  was expired.";
-            model.addAttribute("message", msg);
-            logger.debug(msg);
-        } catch (UnknownAccountException e) {
-            msg = "账户不存在!There is no user with username of " + token.getPrincipal();
-            model.addAttribute("message", msg);
-            logger.debug(msg);
-        } catch (UnauthorizedException e) {
-            msg = "ddd" + e.getMessage();
-            model.addAttribute("message", msg);
-            logger.debug(msg);
-        }
-
-        return "login";
+        return msg;
     }
 
 
