@@ -2,7 +2,6 @@ package cn.yarne.com.base.controller;
 
 
 import cn.yarne.com.base.model.SysUser;
-import cn.yarne.com.base.model.Users;
 import cn.yarne.com.base.other.ResultData;
 import cn.yarne.com.base.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -10,8 +9,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/system")
@@ -36,7 +31,6 @@ public class SystemController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录接口")
-    @ResponseBody
     public String login(@ApiParam(required = true, value = "用户的信息(登录名，密码)") SysUser sysUser, Model model) {
         //创建一个返回的结果集
         ResultData resultData=new ResultData();
@@ -78,7 +72,7 @@ public class SystemController {
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
-        return "login";
+        return "system/login";
     }
 
 }

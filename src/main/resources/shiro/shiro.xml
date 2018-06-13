@@ -30,7 +30,7 @@
         <!-- 安全管理器必须的 -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 身份认证失败   认证提交的地址 -->
-        <property name="loginUrl" value="/login"/>
+        <property name="loginUrl" value="/system/index"/>
         <!-- 权限认证失败    没有权限认证提交的地址 -->
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <!-- Shiro连接约束配置,即过滤链的定义 -->
