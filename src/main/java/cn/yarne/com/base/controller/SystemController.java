@@ -1,7 +1,10 @@
 package cn.yarne.com.base.controller;
 
 
+import cn.yarne.com.base.exception.LoginException;
 import cn.yarne.com.base.model.SysUser;
+import cn.yarne.com.base.other.Constants;
+import cn.yarne.com.base.other.LoginHelper;
 import cn.yarne.com.base.other.ResultData;
 import cn.yarne.com.base.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -13,11 +16,15 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.Assert;
+import org.apache.taglibs.standard.resources.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/system")
@@ -31,33 +38,25 @@ public class SystemController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录接口")
-    public String login(@ApiParam(required = true, value = "用户的信息(登录名，密码)") SysUser sysUser, Model model) {
+    public ResultData login(@ApiParam(required = true, value = "用户的信息(登录名，密码)") SysUser sysUser, Model model, HttpServletRequest request) {
         //创建一个返回的结果集
         ResultData resultData=new ResultData();
         // 获取shiro主体
         Subject subject = SecurityUtils.getSubject();
         // 根据传来的登录名密码创建一个token用户密码令牌
+        Assert.notNull(sysUser.getLoginName(), "LoginName");
+        Assert.notNull(sysUser.getPassword(), "Password");
         UsernamePasswordToken token = new UsernamePasswordToken(sysUser.getLoginName(), sysUser.getPassword());
         String msg = null;
-        try {
-            //由我们的自定义主体来验证token信息,会跳转到ream中验证
-            subject.login(token);
-            //获取用户登录的session信息
-            Session session = subject.getSession();
-
-            logger.debug("session的Id" + session.getId());
-            logger.debug("session主机地址" + session.getHost());
-            logger.debug("session有效期间" + session.getId());
+        String clientIp = (String) request.getSession().getAttribute(Constants.USER_IP);
+        if (LoginHelper.login(sysUser.getLoginName(), sysUser.getPassword(), clientIp)) {
+            request.setAttribute("msg", "[" + sysUser.getLoginName() + "]登录成功.");
             resultData.setCode(0);
             resultData.setMsg("登录成功");
-        }catch (Exception e) {
-            e.printStackTrace();
-            msg = "用户名或者密码错误" + token.getPrincipal() + " was incorrect.";
-            logger.debug(msg);
-            resultData.setCode(1);
-            resultData.setMsg(msg);
+            return resultData;
         }
-        return msg;
+        request.setAttribute("msg", "[" +sysUser.getLoginName() + "]登录失败.");
+        throw new LoginException("登录失败");
     }
 
 
