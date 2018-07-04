@@ -63,7 +63,7 @@
 
     <div class="layui-trans layadmin-user-login-footer">
 
-        <p>© 2018 <a href="http://www.layui.com/" target="_blank">yarne.cn</a></p>
+        <p>© 2018 <a href="https://github.com/YarNeCn/From-the-beginning-spring-.git" target="_blank">yarne.cn</a></p>
        <%-- <p>
             <span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>
             <span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>
