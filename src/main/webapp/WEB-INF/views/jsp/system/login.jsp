@@ -12,6 +12,7 @@
             type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<iframe src="${pageContext.request.contextPath}/common/background/baiyun.html" allowtransparency="true" style="position: absolute"  title="test" frameborder="0"  width="100%" height="100%" scrolling="no"></iframe>
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
