@@ -45,6 +45,12 @@ public class LoginController {
         }
         logger.debug(error);
         model.addAttribute("error", error);
+        //防止用户登录成功之后回退到登录页面继续登录
+        if(error==null){
+            if(SecurityUtils.getSubject().isAuthenticated()){
+                return "index";
+            }
+        }
         return "system/login";
     }
 

@@ -18,17 +18,12 @@
 </style>
 <body>
 
-<iframe style="padding: 0px; width: 100%; height: 1000px;z-index: -111" frameborder="0"
-        src="${pageContext.request.contextPath}/common/background/baiyun.html">
-</iframe>
 
-
-<%--
-    可以显示一个3d小图标
+<%--可以显示一个3d小图标--%>
 <div class="cssload-loader">
     <div class="cssload-inner cssload-one"></div>
     <div class="cssload-inner cssload-two"></div>
     <div class="cssload-inner cssload-three"></div>
-</div>--%>
+</div>
 </body>
 </html>

@@ -40,7 +40,7 @@
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
         <!-- 成功之后跳转的页面  -->
-        <property name="successUrl" value="/hello"/>
+        <property name="successUrl" value="/index"/>
         <!-- 权限认证失败    没有权限认证提交的地址 -->
         <property name="filters">
             <util:map>
