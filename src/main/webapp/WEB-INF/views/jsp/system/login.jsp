@@ -16,13 +16,13 @@
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2>Everythings</h2>
-            <p>简单的登录</p>
+            <p>${error}</p>
         </div>
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
-            <form @submit.prevent="submit" action="${pageContext.request.contextPath}/system/login" method="post">
+            <form @submit.prevent="submit" action="" method="post">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
-                <input type="text" name="loginName" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
+                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
@@ -72,9 +72,5 @@
 </div>
 <script src="${pageContext.request.contextPath}/common/pubScript.js"
         type="text/javascript" charset="utf-8"></script>
-
-<script type="text/javascript">
-
-</script>
 </body>
 </html>

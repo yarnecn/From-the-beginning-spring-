@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/")
 @Api(value = "测试接口", description = "主要用来测试")
 public class HelloController {
-	
+	//getLogger里面写的哪个类，之后日志就会打在哪个类下边
 	private static final  Logger logger=Logger.getLogger(HelloController.class);
 	
 	@Autowired

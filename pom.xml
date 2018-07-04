@@ -181,6 +181,14 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>${shiro_version}</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-ehcache -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro_version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<!-- 配置私服仓库地址 -->
