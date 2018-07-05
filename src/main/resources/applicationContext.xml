@@ -24,6 +24,8 @@
 	<import resource="classpath:spring/spring_mybatis.xml" />
 	<!-- 导入spring 事物 配置信息 -->
 	<import resource="classpath:spring/spring_transaction.xml" />
+	<!-- 导入spring 缓存 配置信息 -->
+	<import resource="classpath:spring/spring_ehcache.xml" />
 	<!-- 导入Shiro 权限管理的配置信息 -->
 	<import resource="classpath:shiro/shiro.xml" />
 

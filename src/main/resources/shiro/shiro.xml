@@ -18,16 +18,19 @@
 
     <!-- 自定义域realm 用来自定义权限管理 -->
     <bean id="Users_Realm" class="cn.yarne.com.base.shiro.realm.UsersRealm">
-        <!-- 每个ream都可以有不同的凭证 ,现在加上有点问题 -->
-       <!-- <property name="credentialsMatcher" ref="credentialsMatcher"/>
-        <property name="cachingEnabled" value="false"/>-->
+        <!-- 每个ream都可以有不同的凭证  -->
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="cachingEnabled" value="false"/>
     </bean>
 
     <!-- 用户授权/认证信息Cache, 采用EhCache  缓存 -->
     <!--<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">-->
     <!--<property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>-->
     <!--</bean>-->
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <!-- 自己封装的缓存管理器 -->
+    <bean id="cacheManager" class="cn.yarne.com.base.shiro.spring.SpringCacheManagerWrapper">
+        <property name="cacheManager" ref="springCacheManager"/>
+    </bean>
 
     <!-- 安全管理器  ref对象-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -91,7 +94,11 @@
         <property name="cookie" ref="rememberMeCookie" />
     </bean>
 
-    <!-- 凭证匹配器 密码进行md5加密，输错五次之后锁定 -->
+    <!-- 凭证匹配器 密码进行md5加密，输错五次之后锁定
+        注册的时候密码要进行相应的加密方式
+        new SimpleHash("MD5", "密码", "盐", 2).toHex(); 这个方法可以对密码进行md5加盐加密
+        密文：18d756914f681685ad6161b9212570a7    md5+salt(asd)  明文 q1111111
+    -->
     <bean id="credentialsMatcher" class="cn.yarne.com.base.shiro.credentials.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="md5"/>

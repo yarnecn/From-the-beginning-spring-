@@ -40,8 +40,8 @@ public class UsersRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
         //设置盐，也可以不设置。盐通常为登录用户名+时间戳，添加到数据库当中。
-        String salt = "FaQ";
-        //一个简单的认证器，如果不设置盐的话就不能添加第三个参数；
+        String salt = "asd";
+         //一个简单的认证器，如果不设置盐的话就不能添加第三个参数；
         // 第一个参数可以放查询出来的对象、也可以放获取的登录用户名，第二个参数为查询出来的密码，第三个参数为盐，第四个参数为上面设置的setName
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(sysUser, sysUser.getPassword(),
                 ByteSource.Util.bytes(salt), this.getName());
