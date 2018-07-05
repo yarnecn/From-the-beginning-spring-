@@ -121,13 +121,7 @@
         });
     });
     function logout() {
-        layui.msg('确定要退出吗？', {
-            time: 0 //不自动关闭
-            ,btn: ['ok', 'cancel']
-            ,yes: function(index){
-                $.post('${pageContext.request.contextPath}/logout');
-            }
-        });
+        $.post('${pageContext.request.contextPath}/logout');
     }
 
 </script>
