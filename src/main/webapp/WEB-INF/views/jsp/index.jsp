@@ -45,7 +45,7 @@
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退出</a></li>
+            <li class="layui-nav-item"><a href="" onclick="logout()">退出</a></li>
         </ul>
     </div>
 
@@ -120,6 +120,15 @@
             //,anim: 'updown' //切换动画方式
         });
     });
+    function logout() {
+        layui.msg('确定要退出吗？', {
+            time: 0 //不自动关闭
+            ,btn: ['ok', 'cancel']
+            ,yes: function(index){
+                $.post('${pageContext.request.contextPath}/logout');
+            }
+        });
+    }
 
 </script>
 </body>

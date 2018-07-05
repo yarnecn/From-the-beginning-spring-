@@ -56,8 +56,11 @@ public class LoginController {
         return "system/login";
     }
 
-
-    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    /**
+     * 配置了shiro的退出之后，这个一般不会用到了
+     * @return
+     */
+    @RequestMapping(value = "logout", method = { RequestMethod.GET, RequestMethod.POST })
     @ApiOperation(value = "登录失败接口")
     public String logout(){
         //获取认证主体
