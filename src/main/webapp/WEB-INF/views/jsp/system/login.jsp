@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="layui-form-item" style="margin-bottom: 20px;">
-                <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                <input type="checkbox" name="rememberMe" lay-skin="primary" title="记住密码">
              <%--   <a lay-href="/user/forget" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>--%>
             </div>
             <div class="layui-form-item">
@@ -63,7 +63,7 @@
 
     <div class="layui-trans layadmin-user-login-footer">
 
-        <p>© 2018 <a href="http://www.layui.com/" target="_blank">yarne.cn</a></p>
+        <p>© 2018 <a href="https://github.com/YarNeCn/From-the-beginning-spring-.git" target="_blank">yarne.cn</a></p>
        <%-- <p>
             <span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>
             <span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>

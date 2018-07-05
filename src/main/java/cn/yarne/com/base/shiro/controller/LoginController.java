@@ -32,8 +32,10 @@ public class LoginController {
     @RequestMapping(value = "login",method = { RequestMethod.GET, RequestMethod.POST })
     @ApiOperation(value = "登录接口")
     public String login( Model model, HttpServletRequest request) {
+        //如果登录失败从request中获取认证异常信息，shrioLoginFailure就是shiro异常类的全限定名
         String exceptionClassName = (String)request.getAttribute("shiroLoginFailure");
         String error = null;
+        //根据shrio返回的异常路径判断，抛出指定异常信
         if(UnknownAccountException.class.getName().equals(exceptionClassName)) {
             error = "用户名不存在";
         } else if(IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
