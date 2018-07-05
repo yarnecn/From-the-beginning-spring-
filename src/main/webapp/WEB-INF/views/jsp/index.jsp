@@ -121,6 +121,7 @@
         });
     });
     function logout() {
+        alert("tuichu");
         $.post('${pageContext.request.contextPath}/logout');
     }
 
