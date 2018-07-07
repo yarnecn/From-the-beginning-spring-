@@ -1,5 +1,10 @@
 package cn.yarne.com.base.other;
 
+
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 public class ResultData<T> {
 
     /*错误码*/

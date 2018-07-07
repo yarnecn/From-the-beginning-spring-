@@ -9,6 +9,10 @@ import cn.yarne.com.base.mapper.HelloMapper;
 import cn.yarne.com.base.model.Users;
 import cn.yarne.com.base.service.HelloService;
 
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 @Service
 public class HelloServiceImpl implements HelloService {
 

@@ -2,6 +2,11 @@ package cn.yarne.com.base.other;
 
 import org.apache.taglibs.standard.resources.Resources;
 
+
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 public enum HttpCode {
     OK(200),
     MULTI_STATUS(207),

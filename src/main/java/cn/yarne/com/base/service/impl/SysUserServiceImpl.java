@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 @Service
 public class SysUserServiceImpl implements SysUserService {
 

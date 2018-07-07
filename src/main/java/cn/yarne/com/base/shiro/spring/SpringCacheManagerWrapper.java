@@ -15,7 +15,9 @@ import org.springframework.cache.support.SimpleValueWrapper;
 import java.util.*;
 
 /**
- * 包装Spring cache抽象
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ * 包装springcache
  */
 public class SpringCacheManagerWrapper implements CacheManager {
 

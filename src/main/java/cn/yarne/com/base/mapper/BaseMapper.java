@@ -5,7 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import cn.yarne.com.base.model.SysUser;
-
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 public interface BaseMapper<T, V> {
 
     long countByExample(V example);

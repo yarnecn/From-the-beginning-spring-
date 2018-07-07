@@ -8,6 +8,11 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
+
 public class SystemFilter implements Filter {
 
 	public void destroy() {

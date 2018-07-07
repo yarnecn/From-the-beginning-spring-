@@ -12,7 +12,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
 /**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
  * shiro认证成功之后的拦截处理
  */
 public class ShiroFormFilter extends FormAuthenticationFilter {

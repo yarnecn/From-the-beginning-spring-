@@ -15,6 +15,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 @Controller
 @RequestMapping("/")
 @Api(value = "测试接口", description = "主要用来测试")

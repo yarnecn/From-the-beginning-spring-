@@ -4,6 +4,11 @@ import cn.yarne.com.base.other.HttpCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.ui.ModelMap;
 
+
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 public abstract class BaseException extends RuntimeException  {
     public BaseException() {
     }

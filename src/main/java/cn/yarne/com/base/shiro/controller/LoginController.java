@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 @Controller
 @RequestMapping("/")
 @Api(value = "登录接口", description = "登录模块的接口")

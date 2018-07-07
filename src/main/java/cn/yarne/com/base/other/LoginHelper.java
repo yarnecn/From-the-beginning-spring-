@@ -9,6 +9,11 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.taglibs.standard.resources.Resources;
 
+
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ */
 public final class LoginHelper {
     private LoginHelper() {
     }

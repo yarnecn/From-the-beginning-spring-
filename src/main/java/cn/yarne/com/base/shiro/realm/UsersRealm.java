@@ -11,6 +11,12 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
+/**
+ * @author yarne
+ * @version 2016年6月21日 上午9:50:58
+ * 自定义用户realm实现
+ */
 public class UsersRealm extends AuthorizingRealm {
 
     //定义Log对象
