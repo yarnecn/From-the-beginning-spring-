@@ -38,7 +38,7 @@
                     </div>
                     <div class="layui-col-xs5">
                         <div style="margin-left: 10px;">
-                            <img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
+                            <img src="${pageContext.request.contextPath}/getCode" style="height: 38px;" class="layadmin-user-login-codeimg" >
                         </div>
                     </div>
                 </div>
