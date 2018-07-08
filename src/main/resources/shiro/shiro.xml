@@ -56,7 +56,7 @@
         <property name="filterChainDefinitions">
             <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
             <value>
-                /getCode=anon
+                /getCode=anon <!-- 这个是获取验证码，如果不设置为游客可以访问的话会导致验证码出不来 -->
                 /login = authc <!-- 登录的地址必须是authc，不然也不会执行realm而直接执行登录路径了 -->
                 /logout = logout<!--请求logout 清除session-->
                 /common/**=anon <!--设置静态资源文件为游客可访问-->
