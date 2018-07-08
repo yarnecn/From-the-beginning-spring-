@@ -49,13 +49,14 @@ public class LoginController {
         } else if(exceptionClassName != null) {
            error = "其他错误：" + exceptionClassName;
         }
-        logger.debug(error);
-        model.addAttribute("error", error);
         //防止用户登录成功之后回退到登录页面继续登录
         if(error==null){
             if(SecurityUtils.getSubject().isAuthenticated()){
                 return "index";
             }
+        }else{
+            logger.debug(error);
+            model.addAttribute("error", error);
         }
         return "system/login";
     }
