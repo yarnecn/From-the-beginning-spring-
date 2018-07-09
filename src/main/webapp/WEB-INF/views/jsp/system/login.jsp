@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="layui-form-item" style="margin-bottom: 20px;">
-                <input type="checkbox" name="rememberMe" lay-skin="primary" title="记住密码">
+                <input type="checkbox" value="true" name="rememberMe" lay-skin="primary" title="记住我">
              <%--   <a lay-href="/user/forget" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>--%>
             </div>
             <div class="layui-form-item">
