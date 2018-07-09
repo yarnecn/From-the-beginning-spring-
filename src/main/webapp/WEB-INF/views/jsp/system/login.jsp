@@ -34,7 +34,7 @@
                 <div class="layui-row">
                     <div class="layui-col-xs7">
                         <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
-                        <input type="text" name="vercode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
+                        <input type="text" name="verCode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
                     </div>
                     <div class="layui-col-xs5">
                         <div style="margin-left: 10px;">

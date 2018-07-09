@@ -39,4 +39,15 @@ public class ShiroFormFilter extends FormAuthenticationFilter {
         WebUtils.redirectToSavedRequest(request, response, "/index");
         return false;
     }
+
+    @Override
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response,
+                                     Object mappedValue) throws Exception {
+        logger.debug("验证码失败，不往下走了");
+        //如果验证码失败，直接跳过
+        if(request.getAttribute(getFailureKeyAttribute()) != null) {
+            return true;
+        }
+        return super.onAccessDenied(request, response, mappedValue);
+    }
 }

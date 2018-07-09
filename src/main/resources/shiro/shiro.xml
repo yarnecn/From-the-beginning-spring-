@@ -50,6 +50,7 @@
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="authc" value-ref="successFilter"/>
                 <entry key="sysUser" value-ref="sysUserFilter"/>
+                <entry key="jCaptchaValidate" value-ref="validateFilter"/>
             </util:map>
         </property>
         <!-- Shiro连接约束配置,即过滤链的定义 -->
@@ -58,6 +59,7 @@
             <value>
                 /getCode=anon <!-- 这个是获取验证码，如果不设置为游客可以访问的话会导致验证码出不来 -->
                 /login = authc <!-- 登录的地址必须是authc，不然也不会执行realm而直接执行登录路径了 -->
+                /login = jCaptchaValidate,authc
                 /logout = logout<!--请求logout 清除session-->
                 /common/**=anon <!--设置静态资源文件为游客可访问-->
                 /bower_components/** = anon
@@ -114,6 +116,14 @@
         <!-- 这个参数用来配置记住密码这个功能 -->
         <property name="rememberMeParam" value="rememberMe"/>
         <property name="loginUrl" value="/login"/>
+    </bean>
+
+    <!-- 验证码校验 -->
+    <bean id="validateFilter"
+          class="cn.yarne.com.base.shiro.filter.ValidateCodeFilter">
+        <property name="jcaptchaEbabled" value="true"/>
+        <property name="jcaptchaParam" value="verCode"/>
+        <property name="failureKeyAttribute" value="shiroLoginFailure"/>
     </bean>
 
     <!-- 自定义过滤器-->
