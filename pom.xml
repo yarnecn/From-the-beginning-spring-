@@ -144,6 +144,12 @@
 			<artifactId>mybatis-generator-core</artifactId>
 			<version>${mybatis_generator_version}</version>
 		</dependency>
+		<!-- mybatis分页助手 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>4.1.4</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
