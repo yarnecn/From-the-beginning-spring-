@@ -31,4 +31,15 @@ public class SysUserServiceImpl implements SysUserService {
         }
         return null;
     }
+
+    @Override
+    public List<SysUser> querySysUsersByExample(String username, String loginName) {
+        SysUserExample sysUserExample=new SysUserExample();
+        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        criteria.andLoginNameLike(loginName);
+        criteria.andUsernameLike(username);
+        sysUserExample.setOrderByClause("createtime");
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+        return sysUsers;
+    }
 }

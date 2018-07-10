@@ -8,7 +8,7 @@ package cn.yarne.com.base.other;
 public class ResultData<T> {
 
     /*错误码*/
-    private Integer code=1;  //默认为1失败，0成功
+    private Integer code=0;  //1失败，0成功  默认为 0
     /*提示信息*/
     private String msg;
     /*具体的内容*/

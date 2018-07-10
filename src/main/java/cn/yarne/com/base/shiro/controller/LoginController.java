@@ -1,7 +1,6 @@
 package cn.yarne.com.base.shiro.controller;
 
 
-import cn.yarne.com.base.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
@@ -11,7 +10,6 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     private static final Logger logger = Logger.getLogger(LoginController.class);
-
-    @Autowired
-    private SysUserService sysUserService;
 
     @RequestMapping(value = "login",method = { RequestMethod.GET, RequestMethod.POST })
     @ApiOperation(value = "登录接口")
