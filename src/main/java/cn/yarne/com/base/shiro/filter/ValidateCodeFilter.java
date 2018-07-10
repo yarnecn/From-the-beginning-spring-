@@ -1,5 +1,6 @@
 package cn.yarne.com.base.shiro.filter;
 
+import com.alibaba.druid.util.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -32,7 +33,6 @@ public class ValidateCodeFilter extends AccessControlFilter {
     }
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
-        logger.debug("判断验证码是否正确");
         //1、设置验证码是否开启属性，页面可以根据该属性来决定是否显示验证码
         servletRequest.setAttribute("jcaptchaEbabled", jcaptchaEbabled);
         HttpServletRequest httpServletRequest = WebUtils.toHttp(servletRequest);
@@ -45,7 +45,14 @@ public class ValidateCodeFilter extends AccessControlFilter {
         Session session = SecurityUtils.getSubject().getSession();
         String code = (String) session.getAttribute("code");
         if(code!=null){
-            return code.equals(jcaptchaParam);
+            /*
+            * 因为现在前台传过来的验证码不能直接获取到，所以我们换一种方法获取
+            * WebUtils是shiro提供的一个工具类
+            */
+            HttpServletRequest httpRequest = WebUtils.toHttp(servletRequest);
+            String currentCode = httpRequest.getParameter(jcaptchaParam);
+            // 调用alibaba连接池提供的StringUtils工具类，忽略大小写比较
+            return StringUtils.equalsIgnoreCase(code, currentCode);
         }
         return false;
     }
