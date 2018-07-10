@@ -34,11 +34,11 @@
                 <div class="layui-row">
                     <div class="layui-col-xs7">
                         <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
-                        <input type="text" name="verCode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
+                        <input type="text" name="verCode"  id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
                     </div>
                     <div class="layui-col-xs5">
                         <div style="margin-left: 10px;">
-                            <img src="${pageContext.request.contextPath}/getCode" style="height: 38px;" class="layadmin-user-login-codeimg" >
+                            <img src="${pageContext.request.contextPath}/getCode" id="codeImg" onclick="flushCode()" style="height: 38px;" class="layadmin-user-login-codeimg" >
                         </div>
                     </div>
                 </div>
@@ -62,16 +62,15 @@
     </div>
 
     <div class="layui-trans layadmin-user-login-footer">
-
         <p>© 2018 <a href="https://github.com/YarNeCn/From-the-beginning-spring-.git" target="_blank">yarne.cn</a></p>
-       <%-- <p>
-            <span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>
-            <span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>
-            <span><a href="http://www.layui.com/admin/" target="_blank">前往官网</a></span>
-        </p>--%>
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/common/pubScript.js"
         type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    function flushCode() {
+        $("#codeImg").attr('src','${pageContext.request.contextPath}/getCode?'+Math.random());
+    }
+</script>
 </body>
 </html>
