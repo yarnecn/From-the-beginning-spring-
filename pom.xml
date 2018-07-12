@@ -26,6 +26,8 @@
 		<aspectj_version>1.5.4</aspectj_version>
 		<shiro_version>1.4.0</shiro_version>
 		<ehcache_version>2.10.5</ehcache_version>
+		<jedis_version>2.9.0</jedis_version>
+		<spring_date_redis_version>2.0.8.RELEASE</spring_date_redis_version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -227,6 +229,18 @@
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 			<version>${ehcache_version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis_version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>${spring_date_redis_version}</version>
 		</dependency>
 
 

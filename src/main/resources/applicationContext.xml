@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd   
         http://www.springframework.org/schema/aop  
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-        
+
     <!-- 这是spring的主要配置,监听spring上下文ContextLoaderListener来启动 -->    
         
 	<!-- 导入spring 数据源 配置信息 -->
@@ -26,6 +26,8 @@
 	<import resource="classpath:spring/spring_transaction.xml" />
 	<!-- 导入spring 缓存 配置信息 -->
 	<import resource="classpath:spring/spring_ehcache.xml" />
+	<!-- 导入redis 缓存的配置信息 -->
+	<import resource="classpath:spring/spring_redis.xml" />
 	<!-- 导入Shiro 权限管理的配置信息 -->
 	<import resource="classpath:shiro/shiro.xml" />
 

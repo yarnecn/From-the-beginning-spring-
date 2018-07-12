@@ -1,19 +1,19 @@
 package cn.yarne.com.base.controller;
 
 
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import cn.yarne.com.base.model.Users;
 import cn.yarne.com.base.service.HelloService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author yarne
@@ -28,6 +28,9 @@ public class HelloController {
 	
 	@Autowired
 	private HelloService helloService;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	@RequestMapping(value="hello",produces="application/json;charset=utf-8",method=RequestMethod.GET)
 	@ResponseBody
@@ -40,6 +43,17 @@ public class HelloController {
 		user.setName("张三");
 		helloService.insertUsers(user);
 		return helloService.helloDemo();
+	}
+
+
+	@RequestMapping(value="helloRedis",method=RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation(value = "redis测试")
+	public String helloRedis(@ApiParam(required = false, value = "redis key")String name){
+		ValueOperations valueOperations = redisTemplate.opsForValue();
+		valueOperations.set(name,"这是redis");
+		String s = (String) valueOperations.get(name);
+		return s;
 	}
 
 }

@@ -25,8 +25,8 @@
     <!-- classpath: 这个是项目的根目录  等同于和java/resources/webapp 处于同一级别--> 
     <!-- 如需开启或者关闭mybatis sql日志，可以到Log4j配置文件中配置 -->   
     
-	<!-- alibaba durid数据库连接配置文件加载 
-	
+	<!-- alibaba durid数据库连接配置文件加载
+
 		**context:property-placeholder这个加载方式有些特别，它有个属性是system-properties-mode,
 		默认是environment,就是先找系统属性，然后找配置文件里面的属性。所有会出现一直用计算机名去连接数据库
 		的问题，所以一直连接用户是计算机名
@@ -39,10 +39,14 @@
         local-override="是否本地覆盖模式，即如果true，那么properties-ref的属性将覆盖location加载的属性，否则相反"    
         system-properties-mode="系统属性模式，默认ENVIRONMENT（表示先找ENVIRONMENT，再找properties-ref/location的），
         NEVER：表示永远不用ENVIRONMENT的，OVERRIDE类似于ENVIRONMENT"    
-        order="顺序"    
+        order="顺序"
+
+          这个加载方式只能配置一次，不能有多个实例，如果需要添加多个配置文件，以逗号分隔
+          <context:property-placeholderlocation="classpath:db.properties,classpath:monitor.properties" />
+          因为我们采用的是这种配置方式，所以在引入数据库配置的时候，顺便把redis的配置文件也引进来
 	-->
-	<context:property-placeholder system-properties-mode="NEVER" 
-	location="classpath:conn.properties"/>
+	<context:property-placeholder system-properties-mode="NEVER"
+	location="classpath:conn.properties,classpath:redis/redis.properties"/>
 
 	<!-- alibaba druid 数据库连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
