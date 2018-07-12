@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		 http://www.springframework.org/schema/cache
-        http://www.springframework.org/schema/cache/spring-cache-3.2.xsd">
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<!--  因为redis的执行顺序在Mybatis的后面，所以我直接将redis配置文件在加载数据库配置文件的时候一块加入了  -->
 
@@ -35,7 +29,5 @@
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
 		<property name="connectionFactory" ref="jedisConnectionFactory" />
 	</bean>
-
-
 
 </beans>
