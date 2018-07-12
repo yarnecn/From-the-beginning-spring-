@@ -51,7 +51,7 @@ public class HelloController {
 	@ApiOperation(value = "redis测试")
 	public String helloRedis(@ApiParam(required = false, value = "redis key")String name){
 		ValueOperations valueOperations = redisTemplate.opsForValue();
-		valueOperations.set(name,"这是redis");
+		valueOperations.set(name,name);
 		String s = (String) valueOperations.get(name);
 		return s;
 	}

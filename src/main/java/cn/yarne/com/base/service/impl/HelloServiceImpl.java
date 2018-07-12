@@ -18,7 +18,7 @@ public class HelloServiceImpl implements HelloService {
 
 	@Autowired
 	private HelloMapper helloMapper;
-	
+
 	@Override
 	public String helloDemo() {
 		Users selectUsers = helloMapper.selectUsers();
