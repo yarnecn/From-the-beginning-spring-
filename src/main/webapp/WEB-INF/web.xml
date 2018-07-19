@@ -134,6 +134,15 @@
 		<error-code>404</error-code>
 		<location>/error.jsp</location>
 	</error-page>
+
+	<servlet>
+		<servlet-name>payResultNotify</servlet-name>
+		<servlet-class>cn.yarne.com.base.servlet.WXPayResultNotifyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>payResultNotify</servlet-name>
+		<url-pattern>/payResultNotify.do</url-pattern>
+	</servlet-mapping>
 </web-app>
 
 
