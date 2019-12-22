@@ -4,6 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'mvn --version'
+                sh 'tomcat7:run -Dmaven.tomcat.port=8081'
             }
         }
     }
