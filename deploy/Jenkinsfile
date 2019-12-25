@@ -1,11 +1,63 @@
 pipeline {
+    options {
+        //禁止并发构建
+        disableConcurrentBuilds()
+        //持久化工件和控制台输出，用于保存Pipeline最近几次运行的数据
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+        preserveStashes(buildCount: 5)
+        //设置Pipeline运行的超时时间，之后Jenkins应该中止Pipeline
+        timeout(time: 1, unit: 'HOURS')
+    }
+
+    //用来定义全局变量，能全局访问这些参数
+    environment {
+            PROJECT_NAME = 'Everythings'
+            ENV    = 'DEMO'
+    }
+
+
     agent { docker 'maven:3.3.3' }
     stages {
+        stage('Sanity check') {
+                steps {
+                    input "先确认一下是否执行?"
+                }
+            }
         stage('build') {
             steps {
-                sh 'mvn --version'
-                sh 'tomcat7:run -Dmaven.tomcat.port=8081'
+                echo "maven构建应用"
+                sh 'mvn clean package -Dmaven.test.skip=true -s /var/jenkins_home/maven/setting.xml '
             }
         }
+        stage('docker build') {
+                    steps {
+                        echo "docker构建应用"
+                        sh 'docker build -f deploy/Dockerfile .'
+                    }
+             }
     }
+    post {
+            always {
+                echo 'This will always run'
+            }
+            success {
+                echo 'This will run only if successful'
+                mail to: 'y_nell@163.com',
+                                             subject: "Failed Pipeline: ${env.PROJECT_NAME}${env.ENV}",
+                                             body: "Something is wrong with "
+            }
+            failure {
+                echo 'This will run only if failed'
+                mail to: 'y_nell@163.com',
+                             subject: "Failed Pipeline: ${env.PROJECT_NAME}${env.ENV}",
+                             body: "Something is wrong with "
+            }
+            unstable {
+                echo 'This will run only if the run was marked as unstable'
+            }
+            changed {
+                echo 'This will run only if the state of the Pipeline has changed'
+                echo 'For example, if the Pipeline was previously failing but is now successful'
+            }
+        }
 }
