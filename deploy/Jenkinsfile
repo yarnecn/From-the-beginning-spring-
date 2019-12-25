@@ -26,7 +26,7 @@ pipeline {
         stage('build') {
             steps {
                 echo "maven构建应用"
-                sh 'mvn clean package -Dmaven.test.skip=true -s /var/jenkins_home/maven/setting.xml '
+                sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
         stage('docker build') {
