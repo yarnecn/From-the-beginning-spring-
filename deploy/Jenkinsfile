@@ -42,15 +42,15 @@ pipeline {
             }
             success {
                 echo 'This will run only if successful'
-                mail to: 'y_nell@163.com',
-                                             subject: "Failed Pipeline: ${env.PROJECT_NAME}${env.ENV}",
-                                             body: "Something is wrong with "
+               # mail to: 'y_nell@163.com',
+                     #                        subject: "Failed Pipeline: ${env.PROJECT_NAME}${env.ENV}",
+                   #                          body: "Something is wrong with "
             }
             failure {
                 echo 'This will run only if failed'
-                mail to: 'y_nell@163.com',
-                             subject: "Failed Pipeline: ${env.PROJECT_NAME}${env.ENV}",
-                             body: "Something is wrong with "
+               # mail to: 'y_nell@163.com',
+               #              subject: "Failed Pipeline: ${env.PROJECT_NAME}${env.ENV}",
+                #             body: "Something is wrong with "
             }
             unstable {
                 echo 'This will run only if the run was marked as unstable'
