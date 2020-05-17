@@ -1,6 +1,5 @@
 package cn.yarne.com.base.test;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -48,7 +47,6 @@ public class LinkedListDemo<E> {
                 for (int i = 0; i < contains; i++) {
                     Temp = Temp.next;
                 }
-
                 Temp.prev.next=Temp.next;
                 Temp.next.prev=Temp.prev;
                 nowNode = Temp;
@@ -58,9 +56,11 @@ public class LinkedListDemo<E> {
             first = nowNode;
             node.prev = first;
             if (size + 1 > maxSize) {
-                Node<E> endTemp = last.prev;
-                endTemp.next = null;
-                last = endTemp;
+                if(contains==-1){
+                    Node<E> endTemp = last.prev;
+                    endTemp.next = null;
+                    last = endTemp;
+                }
             } else {
                 size++;
             }
@@ -119,21 +119,5 @@ public class LinkedListDemo<E> {
     public E getLast() {
         return last.item;
     }
-
-
-    public static void main(String[] args) {
-        LinkedListDemo<Integer> integerLinkedListDemo = new LinkedListDemo<>(5);
-        integerLinkedListDemo.setSize(5);
-        integerLinkedListDemo.addFirst(5);
-        integerLinkedListDemo.addFirst(10);
-        integerLinkedListDemo.addFirst(15);
-        integerLinkedListDemo.addFirst(20);
-        integerLinkedListDemo.addFirst(25);
-        integerLinkedListDemo.addFirst(15);
-
-        Arrays.asList(integerLinkedListDemo.getAll()).forEach(e-> System.out.println(e));
-
-    }
-
 
 }
