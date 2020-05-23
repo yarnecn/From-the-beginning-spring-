@@ -21,21 +21,28 @@ public class CircleQueue {
     }
 
     public void push(String element) {
+        int index=tail;
         if ((tail + 1) % length == head) {
             System.out.println("队列满了");
         } else {
-            item[tail] = element;
-            tail=(tail+1)%length;
-            System.out.println("插入了"+element);
+            if(index==tail){
+                item[tail] = element;
+                tail=(tail+1)%length;
+                System.out.println("插入了"+element);
+            }
         }
     }
 
     public String pop() {
+        int index=head;
         if (head != tail) {
-            String res = item[head];
-            head=(head+1)%length;
-            System.out.println("消费了"+res);
-            return res;
+            if(index==head){
+                String res = item[head];
+                head=(head+1)%length;
+                System.out.println("消费了"+res);
+                return res;
+            }
+            return null;
         } else {
             System.out.println("队列空了");
             return null;

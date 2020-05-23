@@ -1,16 +1,33 @@
 package cn.yarne.com.base.test;
 
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * 用链表实现一个队列
+ *
  * @param <E>
  */
 public class LinkedQueue<E> {
 
+
+    /**
+     * Lock held by take, poll, etc
+     */
+    private final ReentrantLock takeLock = new ReentrantLock();
+
+    /**
+     * Lock held by put, offer, etc
+     */
+    private final ReentrantLock putLock = new ReentrantLock();
+
+
     //第一个节点
-    private Node<E> first;
+    private volatile Node<E> first;
     //最后一个节点
-    private Node<E> last;
+    private volatile Node<E> last;
 
     private static class Node<E> {
         LinkedQueue.Node<E> next;
@@ -24,9 +41,8 @@ public class LinkedQueue<E> {
         }
     }
 
-    private Object object = new Object();
     //链表当前长度
-    private int length;
+    private volatile AtomicInteger length = new AtomicInteger(0);
     //最大长度
     private int maxlength;
 
@@ -35,7 +51,7 @@ public class LinkedQueue<E> {
     }
 
     public void pushLast(E element) {
-        if (length < maxlength) {
+        if (length.get() < maxlength) {
             if (first == null) {
                 Node<E> node = new Node<E>(null, element, null);
                 first = node;
@@ -46,33 +62,43 @@ public class LinkedQueue<E> {
                 last.next = nowNode;
                 last = nowNode;
             }
-            ++length;
-
+            length.incrementAndGet();
         } else {
             System.out.println("太长了");
         }
         System.out.println(Thread.currentThread() + "添加数据:" + element);
     }
 
-    public void enqueue(E element) {
-        pushLast(element);
+    public void push(E element) {
+        putLock.lock();
+        try {
+            pushLast(element);
+        } finally {
+            putLock.unlock();
+        }
     }
 
-    public void dequeue() {
-
+    public E dequeue() {
+        takeLock.lock();
+        E pop;
+        try {
+            pop = pop();
+        } finally {
+            takeLock.unlock();
+        }
+        return pop;
     }
 
     public E pop() {
-        if (length > 0) {
+        if (length.get() > 0) {
             Node<E> element = first;
-            if (first.next != null) {
-                Node<E> second = first.next;
+            Node<E> second = first!=null?first.next:null;
+            if (second != null) {
                 second.prev = null;
-                first = second;
             }
-            --length;
-            System.out.println(Thread.currentThread() + "取出数据:" + element.item);
-            return element.item;
+            first = second;
+            length.decrementAndGet();
+            return element!=null?element.item:null;
         }
         return null;
 
