@@ -1,7 +1,10 @@
 package cn.yarne.com.base.test;
 
 
-// TODO: 2020/5/21 如何实现一个支持并发Pop的队列
+/**
+ * 用链表实现一个队列
+ * @param <E>
+ */
 public class LinkedQueue<E> {
 
     //第一个节点
