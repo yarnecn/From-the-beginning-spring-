@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<spring_version>5.2.7.RELEASE</spring_version>
+		<spring_version>5.2.22.RELEASE</spring_version>
 		<file_encoding>UTF-8</file_encoding>
 		<commons-lang3_version>3.7</commons-lang3_version>
 		<servlet_version>2.5</servlet_version>
